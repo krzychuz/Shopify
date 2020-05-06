@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shopify.Data;
 
 namespace Shopify.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200506112305_FoodModelSchema")]
+    partial class FoodModelSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -313,30 +315,32 @@ namespace Shopify.Data.Migrations
                     b.ToTable("Dish");
                 });
 
-            modelBuilder.Entity("Shopify.Models.Ingredient", b =>
+            modelBuilder.Entity("Shopify.Models.Ingridient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("DishId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UnitOfMeassureId")
+                    b.Property<int?>("UnitOfMeassureId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DishId");
+
                     b.HasIndex("UnitOfMeassureId");
 
                     b.ToTable("Ingridient");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Ingredient");
                 });
 
             modelBuilder.Entity("Shopify.Models.UnitOfMeassure", b =>
@@ -352,21 +356,6 @@ namespace Shopify.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UnitOfMeassure");
-                });
-
-            modelBuilder.Entity("Shopify.Models.FoodIngredient", b =>
-                {
-                    b.HasBaseType("Shopify.Models.Ingredient");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("DishId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("DishId");
-
-                    b.HasDiscriminator().HasValue("FoodIngredient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -420,20 +409,15 @@ namespace Shopify.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shopify.Models.Ingredient", b =>
-                {
-                    b.HasOne("Shopify.Models.UnitOfMeassure", "UnitOfMeassure")
-                        .WithMany()
-                        .HasForeignKey("UnitOfMeassureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Shopify.Models.FoodIngredient", b =>
+            modelBuilder.Entity("Shopify.Models.Ingridient", b =>
                 {
                     b.HasOne("Shopify.Models.Dish", null)
                         .WithMany("Ingridients")
                         .HasForeignKey("DishId");
+
+                    b.HasOne("Shopify.Models.UnitOfMeassure", "UnitOfMeassure")
+                        .WithMany()
+                        .HasForeignKey("UnitOfMeassureId");
                 });
 #pragma warning restore 612, 618
         }

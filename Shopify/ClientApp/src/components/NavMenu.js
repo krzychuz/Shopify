@@ -48,6 +48,8 @@ var NavMenu = /** @class */ (function (_super) {
                                 React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/counter" }, "Counter")),
                             React.createElement(reactstrap_1.NavItem, null,
                                 React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/fetch-data" }, "Fetch data")),
+                            React.createElement(reactstrap_1.NavItem, null,
+                                React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/food-admin" }, "Manage food")),
                             React.createElement(LoginMenu_1.LoginMenu, null)))))));
     };
     NavMenu.displayName = NavMenu.name;
