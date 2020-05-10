@@ -26,7 +26,19 @@ namespace Shopify.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Dish>>> GetDish()
         {
-            return await _context.Dish.ToListAsync();
+            var allDishes = await _context.Dish.Include(d => d.Ingredients).ToListAsync();
+
+
+            foreach (var dish in allDishes)
+            {
+                foreach (var ingredient in dish.Ingredients)
+                {
+                    ingredient.Ingredient = _context.Ingredient.Find(ingredient.IngredientId);
+                    ingredient.Ingredient.UnitOfMeassure = _context.UnitOfMeassure.Find(ingredient.Ingredient.UnitOfMeassureId);
+                }
+            }
+
+            return allDishes;
         }
 
         // GET: api/Dishes/5
@@ -85,6 +97,27 @@ namespace Shopify.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDish", new { id = dish.Id }, dish);
+        }
+
+        [HttpPost("{id}/ingredient")]
+        public async Task<ActionResult<Dish>> PostIngredient(int id, FoodIngredient foodIngredient)
+        {
+            var dish = await _context.Dish.FindAsync(id);
+            if (dish == null)
+                return NotFound();
+
+            var ingredient = await _context.Ingredient.FindAsync(foodIngredient.IngredientId);
+            if (ingredient == null)
+                return NotFound();
+
+            if (dish.Ingredients == null)
+                dish.Ingredients = new List<FoodIngredient>();
+
+            dish.Ingredients.Add(foodIngredient);
+            _context.Entry(dish).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         // DELETE: api/Dishes/5

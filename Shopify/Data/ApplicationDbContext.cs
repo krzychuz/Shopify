@@ -20,5 +20,7 @@ namespace Shopify.Data
         public DbSet<Shopify.Models.Dish> Dish { get; set; }
         public DbSet<Shopify.Models.Ingredient> Ingredient { get; set; }
         public DbSet<Shopify.Models.UnitOfMeassure> UnitOfMeassure { get; set; }
+
+        public DbSet<Shopify.Models.FoodIngredient> FoodIngredients { get; set; }
     }
 }
