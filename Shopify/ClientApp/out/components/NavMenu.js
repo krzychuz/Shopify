@@ -43,17 +43,13 @@ var NavMenu = /** @class */ (function (_super) {
                     React.createElement(reactstrap_1.Collapse, { className: "d-sm-inline-flex flex-sm-row-reverse", isOpen: !this.state.collapsed, navbar: true },
                         React.createElement("ul", { className: "navbar-nav flex-grow" },
                             React.createElement(reactstrap_1.NavItem, null,
-                                React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/" }, "Home")),
+                                React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/ingredients" }, "Ingredients")),
                             React.createElement(reactstrap_1.NavItem, null,
-                                React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/counter" }, "Counter")),
-                            React.createElement(reactstrap_1.NavItem, null,
-                                React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/fetch-data" }, "Fetch data")),
-                            React.createElement(reactstrap_1.NavItem, null,
-                                React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/food-admin" }, "Manage food")),
+                                React.createElement(reactstrap_1.NavLink, { tag: react_router_dom_1.Link, className: "text-dark", to: "/units-of-measure" }, "Units of measure")),
                             React.createElement(LoginMenu_1.LoginMenu, null)))))));
     };
     NavMenu.displayName = NavMenu.name;
     return NavMenu;
 }(react_1.Component));
 exports.NavMenu = NavMenu;
-//# sourceMappingURL=NavMenu.js.map
+//# sourceMappingURL=C:/Users/krzyc/source/repos/Shopify/Shopify/ClientApp/out/components/NavMenu.js.map

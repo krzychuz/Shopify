@@ -30,4 +30,4 @@ var Layout = /** @class */ (function (_super) {
     return Layout;
 }(React.Component));
 exports.Layout = Layout;
-//# sourceMappingURL=Layout.js.map
+//# sourceMappingURL=C:/Users/krzyc/source/repos/Shopify/Shopify/ClientApp/out/components/Layout.js.map

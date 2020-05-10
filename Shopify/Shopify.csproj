@@ -98,11 +98,11 @@
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
     <TypeScriptOutFile />
-    <TypeScriptOutDir />
+    <TypeScriptOutDir>C:\Users\krzyc\source\repos\Shopify\Shopify\ClientApp\out</TypeScriptOutDir>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
+    <TypeScriptMapRoot>C:\Users\krzyc\source\repos\Shopify\Shopify\ClientApp\out</TypeScriptMapRoot>
+    <TypeScriptSourceRoot>C:\Users\krzyc\source\repos\Shopify\Shopify\ClientApp\src</TypeScriptSourceRoot>
   </PropertyGroup>
 </Project>

@@ -18,4 +18,4 @@ ReactDOM.render(React.createElement(react_router_dom_1.BrowserRouter, { basename
 // disabled by default when Identity is being used.
 //
 //registerServiceWorker();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=C:/Users/krzyc/source/repos/Shopify/Shopify/ClientApp/out/index.js.map
