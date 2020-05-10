@@ -60,8 +60,6 @@
     <TypeScriptCompile Include="ClientApp\src\components\api-authorization\Login.js" />
     <TypeScriptCompile Include="ClientApp\src\components\api-authorization\LoginMenu.js" />
     <TypeScriptCompile Include="ClientApp\src\components\api-authorization\Logout.js" />
-    <TypeScriptCompile Include="ClientApp\src\components\Counter.tsx" />
-    <TypeScriptCompile Include="ClientApp\src\components\FetchData.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\Home.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\Layout.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\NavMenu.tsx" />
