@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Shopify.Models
 {
-    public class FoodIngredient
+    public class DishIngredient
     {
         [Key]
         public int Id { get; set; }
+
         public double Amount { get; set; }
+
         public int IngredientId { get; set; }
-        public virtual Ingredient Ingredient {get; set; }
+
+        public int DishId { get; set; }
     }
 }

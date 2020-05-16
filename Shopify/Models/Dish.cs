@@ -10,7 +10,9 @@ namespace Shopify.Models
     {
         [Key]
         public int Id { get; set; }
+
         public string Name { get; set; }
-        public virtual ICollection<FoodIngredient> Ingredients { get; set; }
+
+        public int DishTypeId { get; set; }
     }
 }
