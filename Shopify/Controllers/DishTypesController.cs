@@ -12,48 +12,48 @@ namespace Shopify.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UnitOfMeassuresController : ControllerBase
+    public class DishTypesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public UnitOfMeassuresController(ApplicationDbContext context)
+        public DishTypesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/UnitOfMeassures
+        // GET: api/DishTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UnitOfMeassure>>> GetUnitOfMeassure()
+        public async Task<ActionResult<IEnumerable<DishType>>> GetDishType()
         {
-            return await _context.UnitOfMeassure.ToListAsync();
+            return await _context.DishType.ToListAsync();
         }
 
-        // GET: api/UnitOfMeassures/5
+        // GET: api/DishTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UnitOfMeassure>> GetUnitOfMeassure(int id)
+        public async Task<ActionResult<DishType>> GetDishType(int id)
         {
-            var unitOfMeassure = await _context.UnitOfMeassure.FindAsync(id);
+            var dishType = await _context.DishType.FindAsync(id);
 
-            if (unitOfMeassure == null)
+            if (dishType == null)
             {
                 return NotFound();
             }
 
-            return unitOfMeassure;
+            return dishType;
         }
 
-        // PUT: api/UnitOfMeassures/5
+        // PUT: api/DishTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUnitOfMeassure(int id, UnitOfMeassure unitOfMeassure)
+        public async Task<IActionResult> PutDishType(int id, DishType dishType)
         {
-            if (id != unitOfMeassure.Id)
+            if (id != dishType.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(unitOfMeassure).State = EntityState.Modified;
+            _context.Entry(dishType).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace Shopify.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UnitOfMeassureExists(id))
+                if (!DishTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace Shopify.Controllers
             return NoContent();
         }
 
-        // POST: api/UnitOfMeassures
+        // POST: api/DishTypes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<UnitOfMeassure>> PostUnitOfMeassure(UnitOfMeassure unitOfMeassure)
+        public async Task<ActionResult<DishType>> PostDishType(DishType dishType)
         {
-            _context.UnitOfMeassure.Add(unitOfMeassure);
+            _context.DishType.Add(dishType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUnitOfMeassure", new { id = unitOfMeassure.Id }, unitOfMeassure);
+            return CreatedAtAction("GetDishType", new { id = dishType.Id }, dishType);
         }
 
-        // DELETE: api/UnitOfMeassures/5
+        // DELETE: api/DishTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<UnitOfMeassure>> DeleteUnitOfMeassure(int id)
+        public async Task<ActionResult<DishType>> DeleteDishType(int id)
         {
-            var unitOfMeassure = await _context.UnitOfMeassure.FindAsync(id);
-            if (unitOfMeassure == null)
+            var dishType = await _context.DishType.FindAsync(id);
+            if (dishType == null)
             {
                 return NotFound();
             }
 
-            _context.UnitOfMeassure.Remove(unitOfMeassure);
+            _context.DishType.Remove(dishType);
             await _context.SaveChangesAsync();
 
-            return unitOfMeassure;
+            return dishType;
         }
 
-        private bool UnitOfMeassureExists(int id)
+        private bool DishTypeExists(int id)
         {
-            return _context.UnitOfMeassure.Any(e => e.Id == id);
+            return _context.DishType.Any(e => e.Id == id);
         }
     }
 }

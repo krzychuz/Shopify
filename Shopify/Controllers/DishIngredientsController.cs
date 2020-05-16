@@ -12,48 +12,48 @@ namespace Shopify.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UnitOfMeassuresController : ControllerBase
+    public class DishIngredientsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public UnitOfMeassuresController(ApplicationDbContext context)
+        public DishIngredientsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/UnitOfMeassures
+        // GET: api/DishIngredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UnitOfMeassure>>> GetUnitOfMeassure()
+        public async Task<ActionResult<IEnumerable<DishIngredient>>> GetFoodIngredients()
         {
-            return await _context.UnitOfMeassure.ToListAsync();
+            return await _context.DishIngredient.ToListAsync();
         }
 
-        // GET: api/UnitOfMeassures/5
+        // GET: api/DishIngredients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UnitOfMeassure>> GetUnitOfMeassure(int id)
+        public async Task<ActionResult<DishIngredient>> GetDishIngredient(int id)
         {
-            var unitOfMeassure = await _context.UnitOfMeassure.FindAsync(id);
+            var dishIngredient = await _context.DishIngredient.FindAsync(id);
 
-            if (unitOfMeassure == null)
+            if (dishIngredient == null)
             {
                 return NotFound();
             }
 
-            return unitOfMeassure;
+            return dishIngredient;
         }
 
-        // PUT: api/UnitOfMeassures/5
+        // PUT: api/DishIngredients/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUnitOfMeassure(int id, UnitOfMeassure unitOfMeassure)
+        public async Task<IActionResult> PutDishIngredient(int id, DishIngredient dishIngredient)
         {
-            if (id != unitOfMeassure.Id)
+            if (id != dishIngredient.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(unitOfMeassure).State = EntityState.Modified;
+            _context.Entry(dishIngredient).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace Shopify.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UnitOfMeassureExists(id))
+                if (!DishIngredientExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace Shopify.Controllers
             return NoContent();
         }
 
-        // POST: api/UnitOfMeassures
+        // POST: api/DishIngredients
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<UnitOfMeassure>> PostUnitOfMeassure(UnitOfMeassure unitOfMeassure)
+        public async Task<ActionResult<DishIngredient>> PostDishIngredient(DishIngredient dishIngredient)
         {
-            _context.UnitOfMeassure.Add(unitOfMeassure);
+            _context.DishIngredient.Add(dishIngredient);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUnitOfMeassure", new { id = unitOfMeassure.Id }, unitOfMeassure);
+            return CreatedAtAction("GetDishIngredient", new { id = dishIngredient.Id }, dishIngredient);
         }
 
-        // DELETE: api/UnitOfMeassures/5
+        // DELETE: api/DishIngredients/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<UnitOfMeassure>> DeleteUnitOfMeassure(int id)
+        public async Task<ActionResult<DishIngredient>> DeleteDishIngredient(int id)
         {
-            var unitOfMeassure = await _context.UnitOfMeassure.FindAsync(id);
-            if (unitOfMeassure == null)
+            var dishIngredient = await _context.DishIngredient.FindAsync(id);
+            if (dishIngredient == null)
             {
                 return NotFound();
             }
 
-            _context.UnitOfMeassure.Remove(unitOfMeassure);
+            _context.DishIngredient.Remove(dishIngredient);
             await _context.SaveChangesAsync();
 
-            return unitOfMeassure;
+            return dishIngredient;
         }
 
-        private bool UnitOfMeassureExists(int id)
+        private bool DishIngredientExists(int id)
         {
-            return _context.UnitOfMeassure.Any(e => e.Id == id);
+            return _context.DishIngredient.Any(e => e.Id == id);
         }
     }
 }

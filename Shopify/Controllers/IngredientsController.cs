@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,40 +25,35 @@ namespace Shopify.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredient()
         {
-            var allIngredients = await _context.Ingredient.ToListAsync();
-
-            foreach (var ingredient in allIngredients)
-                ingredient.UnitOfMeassure = _context.UnitOfMeassure.Find(ingredient.UnitOfMeassureId);
-
-            return allIngredients;
+            return await _context.Ingredient.ToListAsync();
         }
 
         // GET: api/Ingredients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ingredient>> GetIngredient(int id)
         {
-            var Ingredient = await _context.Ingredient.FindAsync(id);
+            var ingredient = await _context.Ingredient.FindAsync(id);
 
-            if (Ingredient == null)
+            if (ingredient == null)
             {
                 return NotFound();
             }
 
-            return Ingredient;
+            return ingredient;
         }
 
         // PUT: api/Ingredients/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIngredient(int id, Ingredient Ingredient)
+        public async Task<IActionResult> PutIngredient(int id, Ingredient ingredient)
         {
-            if (id != Ingredient.Id)
+            if (id != ingredient.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(Ingredient).State = EntityState.Modified;
+            _context.Entry(ingredient).State = EntityState.Modified;
 
             try
             {
@@ -84,28 +78,28 @@ namespace Shopify.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient Ingredient)
+        public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
         {
-            _context.Ingredient.Add(Ingredient);
+            _context.Ingredient.Add(ingredient);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIngredient", new { id = Ingredient.Id }, Ingredient);
+            return CreatedAtAction("GetIngredient", new { id = ingredient.Id }, ingredient);
         }
 
         // DELETE: api/Ingredients/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Ingredient>> DeleteIngredient(int id)
         {
-            var Ingredient = await _context.Ingredient.FindAsync(id);
-            if (Ingredient == null)
+            var ingredient = await _context.Ingredient.FindAsync(id);
+            if (ingredient == null)
             {
                 return NotFound();
             }
 
-            _context.Ingredient.Remove(Ingredient);
+            _context.Ingredient.Remove(ingredient);
             await _context.SaveChangesAsync();
 
-            return Ingredient;
+            return ingredient;
         }
 
         private bool IngredientExists(int id)
