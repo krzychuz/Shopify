@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shopify.Data;
 
-namespace Shopify.Data.Migrations
+namespace Shopify.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -308,6 +308,9 @@ namespace Shopify.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("DishTypeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -316,7 +319,7 @@ namespace Shopify.Data.Migrations
                     b.ToTable("Dish");
                 });
 
-            modelBuilder.Entity("Shopify.Models.FoodIngredient", b =>
+            modelBuilder.Entity("Shopify.Models.DishIngredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -326,7 +329,7 @@ namespace Shopify.Data.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<int?>("DishId")
+                    b.Property<int>("DishId")
                         .HasColumnType("int");
 
                     b.Property<int>("IngredientId")
@@ -334,11 +337,22 @@ namespace Shopify.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DishId");
+                    b.ToTable("DishIngredient");
+                });
 
-                    b.HasIndex("IngredientId");
+            modelBuilder.Entity("Shopify.Models.DishType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.ToTable("FoodIngredients");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DishType");
                 });
 
             modelBuilder.Entity("Shopify.Models.Ingredient", b =>
@@ -355,8 +369,6 @@ namespace Shopify.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UnitOfMeassureId");
 
                     b.ToTable("Ingredient");
                 });
@@ -423,28 +435,6 @@ namespace Shopify.Data.Migrations
                     b.HasOne("Shopify.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Shopify.Models.FoodIngredient", b =>
-                {
-                    b.HasOne("Shopify.Models.Dish", null)
-                        .WithMany("Ingredients")
-                        .HasForeignKey("DishId");
-
-                    b.HasOne("Shopify.Models.Ingredient", "Ingredient")
-                        .WithMany()
-                        .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Shopify.Models.Ingredient", b =>
-                {
-                    b.HasOne("Shopify.Models.UnitOfMeassure", "UnitOfMeassure")
-                        .WithMany()
-                        .HasForeignKey("UnitOfMeassureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
