@@ -10,14 +10,31 @@
         }
     ],
     "configurations": [
-        tsc
         {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
             "url": "http://localhost:5000",
-            "webRoot": "${workspaceFolder}"
-        },
+            "port": 9222,
+            "breakOnLoad": true,
+            "sourceMaps": true,
+            "webRoot": "${workspaceFolder}/Shopify/ClientApp/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+              }
+         },
+         {
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attach Chrome",
+            "url": "http://localhost:5000",
+            "port": 9222,
+            "webRoot": "${workspaceRoot}/wwwroot",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "/Views": "${workspaceRoot}/Views"
+            }
+         },
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
@@ -27,10 +44,6 @@
             "args": [],
             "cwd": "${workspaceFolder}/Shopify",
             "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
-            },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "ASPNETCORE_URLS": "http://localhost:5000"
