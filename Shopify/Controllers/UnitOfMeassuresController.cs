@@ -25,14 +25,14 @@ namespace Shopify.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UnitOfMeassure>>> GetUnitOfMeassure()
         {
-            return await _context.UnitOfMeassure.ToListAsync();
+            return await _context.UnitOfMeassures.ToListAsync();
         }
 
         // GET: api/UnitOfMeassures/5
         [HttpGet("{id}")]
         public async Task<ActionResult<UnitOfMeassure>> GetUnitOfMeassure(int id)
         {
-            var unitOfMeassure = await _context.UnitOfMeassure.FindAsync(id);
+            var unitOfMeassure = await _context.UnitOfMeassures.FindAsync(id);
 
             if (unitOfMeassure == null)
             {
@@ -80,7 +80,7 @@ namespace Shopify.Controllers
         [HttpPost]
         public async Task<ActionResult<UnitOfMeassure>> PostUnitOfMeassure(UnitOfMeassure unitOfMeassure)
         {
-            _context.UnitOfMeassure.Add(unitOfMeassure);
+            _context.UnitOfMeassures.Add(unitOfMeassure);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUnitOfMeassure", new { id = unitOfMeassure.Id }, unitOfMeassure);
@@ -90,13 +90,13 @@ namespace Shopify.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<UnitOfMeassure>> DeleteUnitOfMeassure(int id)
         {
-            var unitOfMeassure = await _context.UnitOfMeassure.FindAsync(id);
+            var unitOfMeassure = await _context.UnitOfMeassures.FindAsync(id);
             if (unitOfMeassure == null)
             {
                 return NotFound();
             }
 
-            _context.UnitOfMeassure.Remove(unitOfMeassure);
+            _context.UnitOfMeassures.Remove(unitOfMeassure);
             await _context.SaveChangesAsync();
 
             return unitOfMeassure;
@@ -104,7 +104,7 @@ namespace Shopify.Controllers
 
         private bool UnitOfMeassureExists(int id)
         {
-            return _context.UnitOfMeassure.Any(e => e.Id == id);
+            return _context.UnitOfMeassures.Any(e => e.Id == id);
         }
     }
 }

@@ -25,14 +25,14 @@ namespace Shopify.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DishType>>> GetDishType()
         {
-            return await _context.DishType.ToListAsync();
+            return await _context.DishTypes.ToListAsync();
         }
 
         // GET: api/DishTypes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DishType>> GetDishType(int id)
         {
-            var dishType = await _context.DishType.FindAsync(id);
+            var dishType = await _context.DishTypes.FindAsync(id);
 
             if (dishType == null)
             {
@@ -80,7 +80,7 @@ namespace Shopify.Controllers
         [HttpPost]
         public async Task<ActionResult<DishType>> PostDishType(DishType dishType)
         {
-            _context.DishType.Add(dishType);
+            _context.DishTypes.Add(dishType);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDishType", new { id = dishType.Id }, dishType);
@@ -90,13 +90,13 @@ namespace Shopify.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<DishType>> DeleteDishType(int id)
         {
-            var dishType = await _context.DishType.FindAsync(id);
+            var dishType = await _context.DishTypes.FindAsync(id);
             if (dishType == null)
             {
                 return NotFound();
             }
 
-            _context.DishType.Remove(dishType);
+            _context.DishTypes.Remove(dishType);
             await _context.SaveChangesAsync();
 
             return dishType;
@@ -104,7 +104,7 @@ namespace Shopify.Controllers
 
         private bool DishTypeExists(int id)
         {
-            return _context.DishType.Any(e => e.Id == id);
+            return _context.DishTypes.Any(e => e.Id == id);
         }
     }
 }

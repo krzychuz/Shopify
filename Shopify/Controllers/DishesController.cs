@@ -25,7 +25,12 @@ namespace Shopify.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Dish>>> GetDish()
         {
-            return await _context.Dish.ToListAsync();
+            return await _context.Dish
+                .Include(d => d.DishIngredients)
+                    .ThenInclude(di => di.Ingredient)
+                        .ThenInclude(i => i.UnitOfMeassure)
+                .Include(dt => dt.DishType)
+                .ToListAsync();
         }
 
         // GET: api/Dishes/5

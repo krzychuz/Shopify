@@ -12,20 +12,26 @@ namespace Shopify.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<Dish> Dish { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<UnitOfMeassure> UnitOfMeassures { get; set; }
+        public DbSet<DishIngredient> DishIngredients { get; set; }
+        public DbSet<DishType> DishTypes { get; set; }
+
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
 
-        public DbSet<Shopify.Models.Dish> Dish { get; set; }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    base.OnModelCreating(builder);
 
-        public DbSet<Shopify.Models.Ingredient> Ingredient { get; set; }
-
-        public DbSet<Shopify.Models.UnitOfMeassure> UnitOfMeassure { get; set; }
-
-        public DbSet<Shopify.Models.DishIngredient> DishIngredient { get; set; }
-
-        public DbSet<Shopify.Models.DishType> DishType { get; set; }
+        //    builder.Entity<UnitOfMeassure>()
+        //        .HasMany(uom => uom.Ingredients)
+        //        .WithOne(i => i.UnitOfMeassure)
+        //        .HasForeignKey(i => i.UnitOfMeassureId);
+        //}
     }
 }

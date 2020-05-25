@@ -25,14 +25,14 @@ namespace Shopify.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredient()
         {
-            return await _context.Ingredient.ToListAsync();
+            return await _context.Ingredients.Include(ingredient => ingredient.UnitOfMeassure).ToListAsync();
         }
 
         // GET: api/Ingredients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ingredient>> GetIngredient(int id)
         {
-            var ingredient = await _context.Ingredient.FindAsync(id);
+            var ingredient = await _context.Ingredients.FindAsync(id);
 
             if (ingredient == null)
             {
@@ -80,7 +80,7 @@ namespace Shopify.Controllers
         [HttpPost]
         public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
         {
-            _context.Ingredient.Add(ingredient);
+            _context.Ingredients.Add(ingredient);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetIngredient", new { id = ingredient.Id }, ingredient);
@@ -90,13 +90,13 @@ namespace Shopify.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Ingredient>> DeleteIngredient(int id)
         {
-            var ingredient = await _context.Ingredient.FindAsync(id);
+            var ingredient = await _context.Ingredients.FindAsync(id);
             if (ingredient == null)
             {
                 return NotFound();
             }
 
-            _context.Ingredient.Remove(ingredient);
+            _context.Ingredients.Remove(ingredient);
             await _context.SaveChangesAsync();
 
             return ingredient;
@@ -104,7 +104,7 @@ namespace Shopify.Controllers
 
         private bool IngredientExists(int id)
         {
-            return _context.Ingredient.Any(e => e.Id == id);
+            return _context.Ingredients.Any(e => e.Id == id);
         }
     }
 }

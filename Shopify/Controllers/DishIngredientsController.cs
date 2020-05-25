@@ -25,14 +25,31 @@ namespace Shopify.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DishIngredient>>> GetFoodIngredients()
         {
-            return await _context.DishIngredient.ToListAsync();
+            return await _context.DishIngredients.ToListAsync();
+        }
+
+        // GET: api/DishIngredients/dish/5
+        [HttpGet("dish/{dishId}")]
+        public async Task<ActionResult<IEnumerable<DishIngredient>>> GetIngredientsForDish(int dishId)
+        {
+            var dish = await _context.Dish
+                .Where(dish => dish.Id == dishId)
+                .Include(d => d.DishIngredients)
+                    .ThenInclude(di => di.Ingredient)
+                        .ThenInclude(i => i.UnitOfMeassure)
+                .Include(dt => dt.DishType)
+                .ToListAsync();
+            
+            var ingredients = dish.Single().DishIngredients.ToList();
+
+            return ingredients;
         }
 
         // GET: api/DishIngredients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<DishIngredient>> GetDishIngredient(int id)
         {
-            var dishIngredient = await _context.DishIngredient.FindAsync(id);
+            var dishIngredient = await _context.DishIngredients.FindAsync(id);
 
             if (dishIngredient == null)
             {
@@ -80,7 +97,7 @@ namespace Shopify.Controllers
         [HttpPost]
         public async Task<ActionResult<DishIngredient>> PostDishIngredient(DishIngredient dishIngredient)
         {
-            _context.DishIngredient.Add(dishIngredient);
+            _context.DishIngredients.Add(dishIngredient);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDishIngredient", new { id = dishIngredient.Id }, dishIngredient);
@@ -90,13 +107,13 @@ namespace Shopify.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<DishIngredient>> DeleteDishIngredient(int id)
         {
-            var dishIngredient = await _context.DishIngredient.FindAsync(id);
+            var dishIngredient = await _context.DishIngredients.FindAsync(id);
             if (dishIngredient == null)
             {
                 return NotFound();
             }
 
-            _context.DishIngredient.Remove(dishIngredient);
+            _context.DishIngredients.Remove(dishIngredient);
             await _context.SaveChangesAsync();
 
             return dishIngredient;
@@ -104,7 +121,7 @@ namespace Shopify.Controllers
 
         private bool DishIngredientExists(int id)
         {
-            return _context.DishIngredient.Any(e => e.Id == id);
+            return _context.DishIngredients.Any(e => e.Id == id);
         }
     }
 }
