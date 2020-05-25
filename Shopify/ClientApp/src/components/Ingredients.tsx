@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import MaterialTable, { Column } from 'material-table';
 import authService from './api-authorization/AuthorizeService'
-import { UnitOfMeasure } from './UnitsOfMeasure';
+import { UnitOfMeasure, UnitsOfMeasure } from './UnitsOfMeasure';
 
 interface Ingredient {
     id: number;
@@ -17,8 +17,19 @@ interface TableState {
     uomData: UnitOfMeasure[];
 }
 
+
+function createUomLookup(unitsOfMeasure: UnitOfMeasure[]): object {
+    var dynamicObject: {[k: string]: any} = {};
+
+    unitsOfMeasure.forEach(function(element, index, array) {
+        dynamicObject[element.id] = element.name;
+    });
+
+    return dynamicObject;
+} 
+
 export class Ingredients extends Component<TableState, TableState> {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.state = { 
             columns: [],
@@ -45,7 +56,7 @@ export class Ingredients extends Component<TableState, TableState> {
                     columns:
                         [
                             { title: 'Name', field: 'name' },
-                            { title: 'Unit of measure', field: 'unitOfMeassure.name', lookup: data }
+                            { title: 'Unit of measure', field: 'unitOfMeassure.id', lookup: createUomLookup(data) } 
                         ]
                 });
             });
@@ -65,6 +76,8 @@ export class Ingredients extends Component<TableState, TableState> {
 
     async handleAdd(row: Ingredient) {
         row.id = 0;
+        row.unitOfMeassureId = row.unitOfMeassure.id;
+        row.unitOfMeassure = null;
 
         fetch("api/Ingredients", {
             method: "POST",
@@ -102,6 +115,9 @@ export class Ingredients extends Component<TableState, TableState> {
         return (
             <MaterialTable
                 title="Units of measure"
+                options = {{
+                    pageSize: 20
+                }}
                 columns={this.state.columns}
                 data={this.state.data}
                 editable={{

@@ -5,6 +5,8 @@ import { Home } from './components/Home';
 import { FoodAdmin } from './components/FoodAdmin';
 import { UnitsOfMeasure } from './components/UnitsOfMeasure';
 import { Ingredients } from './components/Ingredients';
+import { Dishes } from './components/Dishes';
+import { DishIngredients } from './components/DishIngredients';
 //import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -21,6 +23,8 @@ export default class App extends React.Component {
                 <Route path='/food-admin' component={FoodAdmin} />
                 <Route path='/units-of-measure' component={UnitsOfMeasure} />
                 <Route path='/ingredients' component={Ingredients} />
+                <Route path='/dishes' component={Dishes} />
+                <Route path='/dish-ingredients/:dishId' component={DishIngredients} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             </Layout>
         );

@@ -15,7 +15,7 @@ interface NavMenuState {
 export class NavMenu extends Component<NavMenuInterface, NavMenuState> {
     static displayName = NavMenu.name;
 
-    constructor(props) {
+    constructor(props: any) {
         super(props);
 
         this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -44,6 +44,9 @@ export class NavMenu extends Component<NavMenuInterface, NavMenuState> {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/units-of-measure">Units of measure</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} className="text-dark" to="/dishes">Dishes</NavLink>
                                 </NavItem>
                                 <LoginMenu>
                                 </LoginMenu>

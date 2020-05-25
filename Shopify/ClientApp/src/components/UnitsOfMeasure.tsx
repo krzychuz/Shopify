@@ -14,7 +14,7 @@ interface TableState {
 }
 
 export class UnitsOfMeasure extends Component<TableState, TableState> {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.state = { 
             columns: [ { title: 'Name', field: 'name' } ],
@@ -77,6 +77,9 @@ export class UnitsOfMeasure extends Component<TableState, TableState> {
         return (
             <MaterialTable
                 title="Units of measure"
+                options = {{
+                    pageSize: 20
+                }}
                 columns={this.state.columns}
                 data={this.state.data}
                 editable={{
