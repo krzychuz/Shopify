@@ -1,5 +1,4 @@
 {
-  "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -19,12 +18,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": false, //temporal
-    "strictNullChecks": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "strictNullChecks": false
   },
   "include": [
     "src"
